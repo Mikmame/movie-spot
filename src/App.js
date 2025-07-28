@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./index.css";
+import { Header } from "./layout/Header";
+import { Footer } from "./layout/Footer";
+import { Main } from "./layout/Main";
+import { ScrollToTop } from "./components/ScrollToTop";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  mainRef = React.createRef();
+
+  handleReset = () => {
+    if (this.mainRef.current && this.mainRef.current.resetSearch) {
+      this.mainRef.current.resetSearch();
+    }
+  };
+
+  render() {
+    return (
+      <>
+        <Header onReset={this.handleReset} />
+        <Main ref={this.mainRef} />
+        <Footer />
+        <ScrollToTop />
+      </>
+    );
+  }
 }
 
 export default App;
